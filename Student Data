@@ -1,0 +1,70 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+unique_students = data['First name and last name'].nunique()
+average_gpa = data['GPA'].mean()
+
+sns.countplot(x='Year of graduation', data=data)
+plt.title("Distribution of Students by Graduation Year")
+plt.xlabel("Graduation Year")
+plt.ylabel("Number of Students")
+plt.show()
+
+sns.histplot(x='Experience with Python programming (in months)', data=data, bins=10)
+plt.title("Distribution of Python Programming Experience")
+plt.xlabel("Months of Experience")
+plt.ylabel("Number of Students")
+plt.show()
+
+average_income = data['Family income'].mean()
+print("5. Average Family Income:", average_income)
+
+top_colleges_gpa = data.groupby('College name')['GPA'].mean().nlargest(5)
+print("6. Top 5 Colleges by Average GPA:")
+print(top_colleges_gpa)
+
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='Expected Salary', y='Quantity (number of courses completed)', data=data)
+plt.title("7. Boxplot of Quantity vs Expected Salary")
+plt.xlabel("Expected Salary")
+plt.ylabel("Number of Courses Completed")
+plt.show()
+
+avg_gpa_by_city = data.groupby('City')['GPA'].mean()
+print("8. Average GPA by City:")
+print(avg_gpa_by_city)
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='Family income', y='GPA', data=data)
+plt.title("9. Relationship between Family Income and GPA")
+plt.xlabel("Family Income")
+plt.ylabel("GPA")
+plt.show()
+
+plt.figure(figsize=(10, 6))
+sns.pairplot(data, vars=['GPA', 'Family income', 'Experience with Python programming (in months)', 'Expected Salary'])
+plt.title("10. Pairplot of GPA, Family Income, Experience, and Expected Salary")
+plt.show()
+
+event_field_count = data.groupby('Field of study')['Event'].value_counts().unstack()
+event_field_count.plot(kind='bar', stacked=True, figsize=(12, 6))
+plt.title("11. Event Participation by Field of Study")
+plt.xlabel("Field of Study")
+plt.ylabel("Number of Students")
+plt.legend(title="Event")
+plt.show()
+
+sns.boxplot(x='Leadership skills', y='GPA', data=data)
+plt.title("12. GPA by Leadership Skills")
+plt.xlabel("Leadership Skills")
+plt.ylabel("GPA")
+plt.show()
+
+sns.boxplot(x='Leadership skills', y='Expected Salary', data=data)
+plt.title("12. Expected Salary by Leadership Skills")
+plt.xlabel("Leadership Skills")
+plt.ylabel("Expected Salary")
+plt.show()
+
+if __name__ == "__main__":
+    pass
